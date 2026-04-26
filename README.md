@@ -1,69 +1,75 @@
-﻿🧾 Pedido API Project
-📌 Descrição
+﻿# 🧾 Pedido API
 
-Este projeto tem como objetivo demonstrar a criação de uma API REST em Java utilizando Spring Boot, com persistência de dados e validações.
+## 📌 Descrição
+Este projeto tem como objetivo demonstrar a criação de uma API REST em Java utilizando **Spring Boot**, com persistência de dados e validações.
 
-A aplicação permite gerenciar pedidos, incluindo:
+A aplicação permite o gerenciamento de pedidos, incluindo:
 
-cadastro de pedidos
-listagem
-busca por ID
-atualização
-remoção
+- 📦 Cadastro de pedidos  
+- 📋 Listagem de pedidos  
+- 🔍 Busca por ID  
+- ✏️ Atualização  
+- ❌ Remoção  
 
-Os dados são armazenados em um banco de dados H2 em memória, facilitando testes e desenvolvimento.
+Os dados são armazenados em um banco de dados **H2 em memória**, facilitando testes e desenvolvimento.
 
-🚀 Tecnologias Utilizadas
-Java
-Spring Boot
-Spring Data JPA
-H2 Database (em memória)
-Maven
-Jakarta Validation
-📁 Estrutura do Projeto
+---
 
-O projeto segue uma organização em camadas:
+## 🚀 Tecnologias Utilizadas
+
+- Java  
+- Spring Boot  
+- Spring Data JPA  
+- H2 Database  
+- Maven  
+- Jakarta Validation  
+
+---
+
+## 📁 Estrutura do Projeto
+
 
 src/main/java/br/com/fiap/checkpoint1/
- ├── controller
- ├── model
- ├── repository
- └── service
-🔹 model
+├── controller
+├── model
+├── repository
+└── service
 
-Contém a entidade Pedido com os atributos:
 
-id (Long, chave primária)
-clienteNome (String, obrigatório)
-dataPedido (LocalDate, automático)
-valorTotal (double, não negativo)
-🔹 repository
+- **controller** → endpoints da API  
+- **model** → entidade Pedido  
+- **repository** → acesso ao banco de dados  
+- **service** → regras de negócio  
 
-Interface responsável pela comunicação com o banco de dados:
+---
 
-PedidoRepository (extends JpaRepository)
-🔹 service
+## 📦 Endpoints
 
-Camada de regras de negócio:
+| Método | Endpoint        | Descrição              |
+|--------|---------------|------------------------|
+| GET    | /pedidos       | Lista todos os pedidos |
+| GET    | /pedidos/{id}  | Busca por ID           |
+| POST   | /pedidos       | Cria um pedido         |
+| PUT    | /pedidos/{id}  | Atualiza um pedido     |
+| DELETE | /pedidos/{id}  | Remove um pedido       |
 
-salvar pedidos
-buscar por ID
-listar todos
-deletar
-🔹 controller
+---
 
-Responsável pelos endpoints REST:
+## 🔄 Exemplo de Requisição
 
-GET /pedidos → lista todos
-GET /pedidos/{id} → busca por ID
-POST /pedidos → cria pedido
-PUT /pedidos/{id} → atualiza pedido
-DELETE /pedidos/{id} → remove pedido
-⚙️ Configuração do Banco de Dados
+### ➕ Criar Pedido
 
-O projeto utiliza o H2 Database em memória.
+## json
+POST /pedidos
+{
+  "clienteNome": "João",
+  "valorTotal": 150.0
+}
 
-📄 application.properties
+## ⚙️ Configuração do Banco (H2)
+
+Arquivo: application.properties
+
 spring.datasource.url=jdbc:h2:mem:pedidos-db
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
@@ -74,47 +80,34 @@ spring.h2.console.path=/h2-console
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
-▶️ Como Executar o Projeto
+
+## Como Executar
+Clone o repositório
+Abra o projeto na IDE
 Execute a aplicação Spring Boot
-Acesse o console do H2 no navegador:
+
+##  Acessar Banco H2
+
+Abra no navegador:
+
 http://localhost:8080/h2-console
-Dados de acesso:
+Credenciais:
 JDBC URL: jdbc:h2:mem:pedidos-db
 User: sa
 Password: (vazio)
-🔄 Exemplos de Uso da API
-🔹 Criar pedido (POST)
-POST /pedidos
-{
-  "clienteNome": "João",
-  "valorTotal": 150.0
-}
-🔹 Listar pedidos (GET)
-GET /pedidos
-🔹 Buscar por ID (GET)
-GET /pedidos/1
-🔹 Atualizar pedido (PUT)
-PUT /pedidos/1
-{
-  "clienteNome": "Maria",
-  "valorTotal": 200.0
-}
-🔹 Deletar pedido (DELETE)
-DELETE /pedidos/1
 ✅ Regras de Validação
-O nome do cliente é obrigatório (@NotBlank)
-O valor total não pode ser negativo (@PositiveOrZero)
-A data do pedido é preenchida automaticamente
-👥 Integrantes
+✔️ Nome do cliente obrigatório
+✔️ Valor total não pode ser negativo
+✔️ Data do pedido preenchida automaticamente
+
+## 👥 Integrantes
 João Victor Oliveira dos Santos — RM557948
 Matheus Alcântara Estevão — RM558193
 Nicolle Pellegrino Jelinski — RM558610
 Pedro Pereira dos Santos — RM552047
 Eric Segawa Montagner — RM558224
-📌 Observação
 
-Para executar corretamente:
-
-Certifique-se de que as dependências do Maven estão instaladas
-Execute a aplicação antes de acessar o H2 ou os endpoints
-Utilize ferramentas como Postman para testar a API
+## 📌 Observação
+Execute a aplicação antes de acessar os endpoints
+Utilize Postman ou Insomnia para testar a API
+O banco H2 é temporário (dados são apagados ao reiniciar)
